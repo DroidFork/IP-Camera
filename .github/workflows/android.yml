@@ -2,14 +2,17 @@ name: create-debug
 
 on:
   workflow_dispatch:  # Enables manual trigger
-  
+
+env:
+  ANDROID_PROJECT_DIR: Andorid
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: Andorid
+        working-directory: ${{ env.ANDROID_PROJECT_DIR }}
 
     steps:
     - uses: actions/checkout@v4
@@ -26,11 +29,10 @@ jobs:
     - name: Assemble Debug
       run: ./gradlew assembleDebug
 
-    - name: Scan for APKs
-      run: find . -type f -name "*.apk"
-
     - name: Upload Debug APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: app-debug-apk
-        path: Andorid/app/build/outputs/apk/debug/app-debug.apk
+        path: ${{ env.ANDROID_PROJECT_DIR }}/app/build/outputs/apk/debug/app-debug.apk
+
+
