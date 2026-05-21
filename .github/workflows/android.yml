@@ -9,7 +9,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Android
+        working-directory: Andorid
 
     steps:
     - uses: actions/checkout@v4
